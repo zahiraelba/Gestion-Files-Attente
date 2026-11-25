@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - FileFlow</title>
+    <style>
+       
+        :root {
+            --dark-blue: #1E1B4B;
+            --primary-blue: #4338CA;
+            --light-blue: #6366F1;
+            --pale-blue: #A5B4FC;
+            --bg-blue: #E0E7FF;
+            --white: #F8FAFF;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body {
+            height: 100vh;
+            display: flex;
+            background-color: var(--white);
+            color: var(--dark-blue);
+            overflow: hidden;
+        }
+
+        /* =========================================
+           LEFT SIDE: BRANDING / ILLUSTRATION
+           ========================================= */
+        .brand-section {
+            flex: 1;
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative background circles */
+        .brand-section::before, .brand-section::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .brand-section::before { width: 400px; height: 400px; top: -100px; left: -100px; }
+        .brand-section::after { width: 300px; height: 300px; bottom: -50px; right: -50px; }
+
+        .brand-content {
+            z-index: 1;
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .brand-logo {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--white), var(--pale-blue));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-tagline {
+            font-size: 18px;
+            color: var(--pale-blue);
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           RIGHT SIDE: LOGIN FORM
+           ========================================= */
+        .login-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background-color: var(--white);
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 400px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .login-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .login-header h2 {
+            font-size: 32px;
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        /* Form Inputs */
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            padding-left: 45px; /* Space for icon */
+            border: 2px solid var(--bg-blue);
+            border-radius: 10px;
+            font-size: 15px;
+            color: var(--dark-blue);
+            background-color: var(--white);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--light-blue);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        /* SVG Icons inside inputs */
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 42px;
+            width: 20px;
+            height: 20px;
+            fill: var(--pale-blue);
+            transition: fill 0.3s;
+        }
+
+        .input-group input:focus + .input-icon {
+            fill: var(--primary-blue);
+        }
+
+        /* Submit Button */
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(67, 56, 202, 0.3);
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(67, 56, 202, 0.4);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        /* Error Message */
+        .error-message {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+            border: 1px solid #fecaca;
+        }
+
+        /* Footer links */
+        .login-footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .login-footer a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            body { flex-direction: column; }
+            .brand-section { padding: 40px 20px; flex: none; height: 200px; }
+            .brand-logo { font-size: 32px; }
+            .login-section { flex: 1; }
+            .input-icon { top: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Left Side: Branding -->
+    <div class="brand-section">
+        <div class="brand-content">
+            <div class="brand-logo">FileFlow</div>
+            <p class="brand-tagline">Gérez vos files d'attente intelligemment.<br>Fluidifiez l'accueil de vos clients.</p>
+        </div>
+    </div>
+
+    <!-- Right Side: Login Form -->
+    <div class="login-section">
+        <div class="login-box">
+            <div class="login-header">
+                <h2>Bienvenue</h2>
+                <p>Connectez-vous pour accéder à votre espace</p>
+            </div>
+
+            <!-- Error Message Container -->
+            <div id="errorMsg" class="error-message"></div>
+
+            <form id="loginForm">
+                <!-- Username Input -->
+                <div class="input-group">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" placeholder="Entrez votre identifiant" required autocomplete="off">
+                    <!-- User SVG Icon -->
+                    <svg class="input-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                </div>
+
+                <!-- Password Input -->
+                <div class="input-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+                    <!-- Lock SVG Icon -->
+                    <svg class="input-icon" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
+                </div>
+
+                <button type="submit" class="btn-login" id="submitBtn">Se connecter</button>
+            </form>
+
+            <div class="login-footer">
+                <p>Pas de compte ? <a href="#">Contactez l'administrateur</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const errorMsg = document.getElementById('errorMsg');
+            const formData = new FormData();
+            
+            formData.append('username', document.getElementById('username').value);
+            formData.append('password', document.getElementById('password').value);
+
+            // Change button state
+            btn.innerText = "Connexion en cours...";
+            btn.style.opacity = "0.7";
+            btn.disabled = true;
+            errorMsg.style.display = 'none';
+
+            // Send request to backend
+            fetch('../backend/api/login.php', { method: 'POST', body: formData })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    // Redirect based on role
+                    if(data.role === 'admin') {
+                        window.location.href = 'admin.php'; 
+                    } else {
+                        window.location.href = 'display.php'; 
+                    }
+                } else {
+                    // Show error
+                    errorMsg.innerText = data.message || "Identifiants incorrects.";
+                    errorMsg.style.display = 'block';
+                    btn.innerText = "Se connecter";
+                    btn.style.opacity = "1";
+                    btn.disabled = false;
+                }
+            })
+            .catch(err => {
+                errorMsg.innerText = "Erreur de connexion au serveur.";
+                errorMsg.style.display = 'block';
+                btn.innerText = "Se connecter";
+                btn.style.opacity = "1";
+                btn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
