@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Attendo – Administration</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav class="side" aria-label="Navigation">
+  <div class="logo">Attendo</div>
+  <button class="on">Tableau de bord</button>
+  <button>Files d’attente</button>
+  <button>Guichets</button>
+  <button>Agents</button>
+  <button>Statistiques</button>
+  <button>Paramètres</button>
+  <div class="user"><b>Administrateur</b><br>Agence Guéliz</div>
+</nav>
+<main>
+  <header>
+    <div>
+      <h1>Tableau de bord</h1>
+      <p class="sub" id="clock"></p>
+    </div>
+    <div class="tools">
+      <select id="svcSel" aria-label="Service"></select>
+      <button class="btn" id="add">Nouveau ticket</button>
+      <button class="btn ghost" id="theme">Mode sombre</button>
+    </div>
+  </header>
+
+  <h2>Guichets</h2>
+  <section class="board" id="board"></section>
+
+  <section class="kpis" id="kpis"></section>
+
+  <div class="cols">
+    <section class="panel">
+      <h2>File d’attente en cours</h2>
+      <div class="scroll"><table><thead><tr><th>Ticket</th><th>Service</th><th>Attente</th><th>Statut</th></tr></thead><tbody id="rows"></tbody></table></div>
+    </section>
+    <section class="panel">
+      <h2>Tickets servis par heure</h2>
+      <div id="chart"></div>
+      <h2 style="margin-top:20px">En attente par service</h2>
+      <div class="svc" id="svc"></div>
+    </section>
+  </div>
+</main>
+
+<script src="../js/admin.js"></script>
+</body>
+</html>
